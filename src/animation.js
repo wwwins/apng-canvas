@@ -11,6 +11,7 @@ var Animation = function () {
     this.height = 0;
     this.numPlays = 0;
     this.playTime = 0;
+    this.playbackRate = 1.0;
     this.frames = [];
 
     /**
@@ -130,8 +131,8 @@ var Animation = function () {
         contexts.forEach(function (ctx) {ctx.drawImage(frame.img, frame.left, frame.top);});
 
         if (nextRenderTime == 0) nextRenderTime = now;
-        while (now > nextRenderTime + ani.playTime) nextRenderTime += ani.playTime;
-        nextRenderTime += frame.delay;
+        while (now > nextRenderTime + ani.playTime/ani.playbackRate) nextRenderTime += ani.playTime/ani.playbackRate;
+        nextRenderTime += frame.delay/ani.playbackRate;
     };
 };
 
